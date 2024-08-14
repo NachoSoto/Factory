@@ -72,7 +72,7 @@ public struct Factory<T>: FactoryModifying {
     ///   current container as well defining the scope.
     ///   - key: Hidden value used to differentiate different instances of the same type in the same container.
     ///   - factory: A factory closure that produces an object of the desired type when required.
-    public init(_ container: ManagedContainer, key: StaticString = #function, _ factory: @escaping @Sendable () -> T) {
+    public init(_ container: ManagedContainer, key: StaticString = #function, _ factory: @escaping @isolated(any) @Sendable () -> T) {
         self.registration = FactoryRegistration<Void,T>(key: key, container: container, factory: factory)
     }
 
